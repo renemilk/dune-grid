@@ -1306,9 +1306,10 @@ namespace Dune {
         for (counthexa=m; counthexa < simplex.size(); counthexa++)
           simplex[counthexa].resize(verticesPerCube);
         if(dimw_ == 3) {
-          for(int i =0; i < nofcells_[0]; i++)
+          for(int k=0; k < nofcells_[2]; k++)
             for(int j=0; j < nofcells_[1]; j++)
-              for(int k=0; k < nofcells_[2]; k++) {
+              for(int i =0; i < nofcells_[0]; i++)
+              {
                 simplex[m][0] = offset+getIndex(i,j,k);
                 simplex[m][1] = offset+getIndex(i+1,j,k);
                 simplex[m][2] = offset+getIndex(i,j+1,k);
@@ -1321,8 +1322,9 @@ namespace Dune {
               }
         }
         else if (dimw_==2) {
-          for(int i =0; i < nofcells_[0]; i++)
-            for(int j=0; j < nofcells_[1]; j++) {
+          for(int j=0; j < nofcells_[1]; j++)
+            for(int i =0; i < nofcells_[0]; i++)
+            {
               simplex[m][0] = offset+getIndex(i,j);
               simplex[m][1] = offset+getIndex(i+1,j);
               simplex[m][2] = offset+getIndex(i,j+1);
