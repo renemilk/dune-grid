@@ -57,12 +57,16 @@ inline Dune::GeometryType Dune::UGGridGeometry<mydim,coorddim,GridImp>::type() c
 }
 
 template<int mydim, int coorddim, class GridImp>
-inline const Dune::FieldVector<typename GridImp::ctype, coorddim>& Dune::UGGridGeometry<mydim,coorddim,GridImp>::
+const Dune::FieldVector<typename GridImp::ctype, coorddim>& Dune::UGGridGeometry<mydim,coorddim,GridImp>::
 operator [](int i) const
 {
+  typedef const FieldVector<typename GridImp::ctype, coorddim> ReturnType;
   // This geometry is a vertex
   if (mydim==0)
-    return reinterpret_cast<FieldVector<typename GridImp::ctype, coorddim>&>(((typename UG_NS<coorddim>::Node*)target_)->myvertex->iv.x);
+  {
+    const UG::DOUBLE (&vx)[mydim] = ((typename UG_NS<coorddim>::Node*)target_)->myvertex->iv.x;
+    return reinterpret_cast<ReturnType &> (vx);
+  }
 
   // ////////////////////////////////
   //  This geometry is an element
@@ -72,7 +76,10 @@ operator [](int i) const
   i = UGGridRenumberer<mydim>::verticesDUNEtoUG(i,type());
 
   if (mode_==element_mode)
-    return reinterpret_cast<FieldVector<typename GridImp::ctype, coorddim>&>(UG_NS<coorddim>::Corner(((typename UG_NS<coorddim>::Element*)target_),i)->myvertex->iv.x);
+  {
+    const UG::DOUBLE (&vx)[mydim] = UG_NS<coorddim>::Corner(((typename UG_NS<coorddim>::Element*)target_),i)->myvertex->iv.x;
+    return reinterpret_cast<ReturnType &> (vx);
+  }
 
   return coord_[i];
 }
@@ -81,7 +88,7 @@ template< int mydim, int coorddim, class GridImp>
 inline Dune::FieldVector<typename GridImp::ctype, coorddim> Dune::UGGridGeometry<mydim,coorddim,GridImp>::
 global(const FieldVector<UGCtype, mydim>& local) const
 {
-  FieldVector<UGCtype, coorddim> globalCoord;
+  FieldVector<UGCtype, coorddim> globalCoord (0);
 
   if (mode_==element_mode) {
 
