@@ -683,6 +683,9 @@ void assertNeighbor (Grid &g)
         //assert(globalid.id(*e) >= 0);
         assert(it != endit);
 
+        // call id of global id set
+        globalid.id( *e );
+
         if(! e->isLeaf() )
         {
           if( e->ileafbegin() != e->ileafend())
