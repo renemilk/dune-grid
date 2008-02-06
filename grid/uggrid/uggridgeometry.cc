@@ -64,8 +64,7 @@ operator [](int i) const
   // This geometry is a vertex
   if (mydim==0)
   {
-    const UG::DOUBLE (&vx)[mydim] = ((typename UG_NS<coorddim>::Node*)target_)->myvertex->iv.x;
-    return reinterpret_cast<ReturnType &> (vx);
+    return reinterpret_cast<ReturnType &> (((typename UG_NS<coorddim>::Node*)target_)->myvertex->iv.x);
   }
 
   // ////////////////////////////////
@@ -77,8 +76,7 @@ operator [](int i) const
 
   if (mode_==element_mode)
   {
-    const UG::DOUBLE (&vx)[mydim] = UG_NS<coorddim>::Corner(((typename UG_NS<coorddim>::Element*)target_),i)->myvertex->iv.x;
-    return reinterpret_cast<ReturnType &> (vx);
+    return reinterpret_cast<ReturnType &> (UG_NS<coorddim>::Corner(((typename UG_NS<coorddim>::Element*)target_),i)->myvertex->iv.x);
   }
 
   return coord_[i];
