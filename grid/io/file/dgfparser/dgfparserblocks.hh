@@ -1105,49 +1105,69 @@ namespace Dune {
     public:
       const static char* ID;
       // initialize block and get dimension of world
-      GridParameterBlock(std::istream& in)
+      GridParameterBlock(std::istream& in,
+                         const bool readOverlapAndBnd)
         : BasicBlock(in,ID)
           , _periodic()
           , _overlap(0) // default value
           , _noClosure(false) // default value
       {
-        if (isempty()) {
-          derr << "WARNING: no grid parameters specified! Defaulting overlap to 1!\n";
-          derr << "         See documentation of GridParameterBlock to change this value. \n";
-        }
-        else
+        if (! isempty() )
         {
-          // check overlap
-          if (findtoken("overlap"))
+          if( readOverlapAndBnd  )
           {
-            int x;
-            if(getnextentry(x)) _overlap = x;
-
-            if (_overlap < 0)
+            // check overlap
+            if (findtoken("overlap"))
             {
-              DUNE_THROW(DGFException,"Negative overlap specified!");
-            }
-          }
-          // check periodic grid
-          if (findtoken("periodic"))
-          {
-            int x;
-            while (getnextentry(x))
-            {
-              _periodic.insert(x);
-            }
-          }
-          // check closure
-          if (findtoken("closure"))
-          {
-            std::string clo;
-            if(getnextentry(clo))
-            {
-              makeupcase(clo);
-              if(clo == "NONE")
+              int x;
+              if( getnextentry(x) ) _overlap = x;
+              else
               {
-                _noClosure = true;
+                dwarn << "GridParameterBlock: found keyword `overlap' but no value, defaulting to `" <<  _overlap  <<"' !\n";
               }
+
+              if (_overlap < 0)
+              {
+                DUNE_THROW(DGFException,"Negative overlap specified!");
+              }
+            }
+            else
+            {
+              dwarn << "GridParameterBlock: could not find keyword `overlap' in DGF file, defaulting to `"<<_overlap<<"' !\n";
+            }
+
+            // check periodic grid
+            if (findtoken("periodic"))
+            {
+              int x;
+              while (getnextentry(x))
+              {
+                _periodic.insert(x);
+              }
+            }
+            else
+            {
+              dwarn << "GridParameterBlock: could not find keyword `periodic' in DGF file, defaulting to no periodic boundary! \n";
+            }
+          }
+          else
+          {
+            // check closure
+            if (findtoken("closure"))
+            {
+              std::string clo;
+              if(getnextentry(clo))
+              {
+                makeupcase(clo);
+                if(clo == "NONE")
+                {
+                  _noClosure = true;
+                }
+              }
+            }
+            else
+            {
+              dwarn << "GridParameterBlock: could not find keyword `closure' in DGF file, defaulting to `GREEN' !\n";
             }
           }
         }
@@ -1236,18 +1256,21 @@ namespace Dune {
           vtx[countvtx].resize(dimw_);
         int m = old_size;
         if(dimw_ == 3) {
-          for(int i =0; i < nofcells_[0]+1; i++)
-            for(int j=0; j < nofcells_[1]+1; j++)
-              for(int k=0; k < nofcells_[2]+1; k++) {
+          for(int k=0; k < nofcells_[2]+1; k++)    // z-dir
+            for(int j=0; j < nofcells_[1]+1; j++)   // y-dir
+              for(int i =0; i < nofcells_[0]+1; i++) // x-dir
+              {
                 vtx[m][0] = p0_[0] + i*h_[0];
                 vtx[m][1] = p0_[1] + j*h_[1];
                 vtx[m][2] = p0_[2] + k*h_[2];
                 m++;
               }
         }
-        else if (dimw_==2) {
-          for(int i =0; i < nofcells_[0]+1; i++)
-            for(int j=0; j < nofcells_[1]+1; j++) {
+        else if (dimw_==2)
+        {
+          for(int j=0; j < nofcells_[1]+1; j++)
+            for(int i =0; i < nofcells_[0]+1; i++)
+            {
               vtx[m][0] = p0_[0] + i*h_[0];
               vtx[m][1] = p0_[1] + j*h_[1];
               m++;
@@ -1358,9 +1381,9 @@ namespace Dune {
 
       int getIndex(int i,int j = 0, int k = 0) {
         if(dimw_ == 3)
-          return i*(nofcells_[1]+1)*(nofcells_[2]+1) + j*(nofcells_[2]+1) + k;
+          return k*(nofcells_[1]+1)*(nofcells_[0]+1) + j*(nofcells_[0]+1) + i;
         else if (dimw_ == 2)
-          return i*(nofcells_[1]+1) + j;
+          return j*(nofcells_[0]+1) + i;
         else
           return i;
       }
