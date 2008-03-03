@@ -735,7 +735,7 @@ namespace Dune {
   template<int codim, PartitionIteratorType pitype, class GridImp >
   inline ALU3dGridLevelIterator<codim,pitype,GridImp> ::
   ALU3dGridLevelIterator(const ALU3dGridLevelIterator<codim,pitype,GridImp> & org )
-    : ALU3dGridEntityPointer<codim,GridImp> ( org )
+    : ALU3dGridEntityPointer<codim,GridImp> ( org.grid_ , org.level_ )
       , level_( org.level_ )
       , iter_(0)
   {
@@ -850,7 +850,7 @@ namespace Dune {
   template<int cdim, PartitionIteratorType pitype, class GridImp>
   inline ALU3dGridLeafIterator<cdim, pitype, GridImp> ::
   ALU3dGridLeafIterator(const ThisType & org)
-    : ALU3dGridEntityPointer <cdim,GridImp> ( org )
+    : ALU3dGridEntityPointer <cdim,GridImp> ( org.grid_, org.level() )
       , iter_(0)
   {
     // assign iterator without cloning entity pointer again
@@ -984,7 +984,7 @@ namespace Dune {
   template <class GridImp>
   inline ALU3dGridHierarchicIterator<GridImp> ::
   ALU3dGridHierarchicIterator(const ALU3dGridHierarchicIterator<GridImp> & org)
-    : ALU3dGridEntityPointer<0,GridImp> (org)
+    : ALU3dGridEntityPointer<0,GridImp> ( org.grid_, org.maxlevel_ )
       , elem_ (org.elem_)
       , maxlevel_(org.maxlevel_)
   {}
