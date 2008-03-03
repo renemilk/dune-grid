@@ -677,8 +677,7 @@ namespace Dune {
   jacobianInverseTransposed (const FieldVector<alu3d_ctype, 3>& local) const
   {
     buildMapping();
-    jInv_ = triMap_.jacobianInverse(local);
-    return jInv_;
+    return triMap_.jacobianInverse(local);
   }
 
   template <>
@@ -695,8 +694,7 @@ namespace Dune {
       called = true;
     }
 #endif
-    jInv_ = biMap_.jacobianInverse(local);
-    return jInv_;
+    return biMap_.jacobianInverse(local);
   }
 
   template <int mydim, int cdim>

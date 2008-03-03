@@ -295,8 +295,6 @@ namespace Dune {
     mutable bool buildTriMap_;
     mutable bool buildBiMap_;
 
-    mutable FieldMatrix<alu3d_ctype, mydim, mydim> jInv_;
-
     mutable FieldVector<alu3d_ctype, mydim> localBaryCenter_;
     mutable alu3d_ctype volume_;
   };
