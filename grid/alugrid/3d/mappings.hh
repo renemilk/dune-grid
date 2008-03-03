@@ -35,6 +35,8 @@ namespace Dune {
     mat_t Df;
     mat_t Dfi;
     double DetDf ;
+    bool affine_;
+
     void linear (const coord_t&) ;
     void inverse (const coord_t&) ;
   public:
@@ -61,6 +63,9 @@ namespace Dune {
                       const vector_t&, const vector_t&,
                       const vector_t&, const vector_t&,
                       const vector_t&, const vector_t&);
+
+    // returns true if mapping is affine
+    inline bool affine () const;
   };
 
   //! A bilinear surface mapping

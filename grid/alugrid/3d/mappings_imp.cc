@@ -45,6 +45,21 @@ namespace Dune {
     a [7][0] = p7 [0] - p5 [0] + p4 [0] - p6 [0] - p3 [0] + p1 [0] + a [2][0] ;
     a [7][1] = p7 [1] - p5 [1] + p4 [1] - p6 [1] - p3 [1] + p1 [1] + a [2][1] ;
     a [7][2] = p7 [2] - p5 [2] + p4 [2] - p6 [2] - p3 [2] + p1 [2] + a [2][2] ;
+
+    {
+      double sum = 0.0;
+      // sum all factor from non-linaer terms
+      for(int i=4; i<8; ++i)
+      {
+        for(int j=0; j<3; ++j)
+        {
+          sum += fabs(a[i][j]);
+        }
+      }
+      // mapping is affine when all higher terms are zero
+      affine_ = (sum < _epsilon);
+    }
+
     return ;
   }
 
@@ -154,6 +169,11 @@ namespace Dune {
       assert (count ++ < 1000) ;
     } while (err > _epsilon) ;
     return ;
+  }
+
+  inline bool TrilinearMapping :: affine () const
+  {
+    return affine_;
   }
 
   //- Bilinear surface mapping
