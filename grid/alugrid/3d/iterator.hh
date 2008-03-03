@@ -501,6 +501,9 @@ namespace Dune {
     //! dereference Entity, faster then the entity pointersmethod
     Entity & dereference () const;
 
+    //! release entity
+    void releaseEntity () {}
+
     //! assignment of iterators
     ThisType & operator = (const ThisType & org);
   private:
@@ -571,6 +574,9 @@ namespace Dune {
     //! dereference Entity, faster then the entity pointersmethod
     Entity & dereference () const;
 
+    //! release entity
+    void releaseEntity () {}
+
     //! assignment of iterators
     ThisType & operator = (const ThisType & org);
 
@@ -617,6 +623,9 @@ namespace Dune {
 
     //! dereference Entity, faster then the entity pointersmethod
     Entity & dereference () const;
+
+    //! release entity
+    void releaseEntity () {}
 
     //! the assignment operator
     ThisType & operator = (const ThisType & org);
