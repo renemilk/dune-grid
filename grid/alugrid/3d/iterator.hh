@@ -584,6 +584,9 @@ namespace Dune {
     // the internal iterator
     IteratorType * iter_;
 
+    // max level for iteration
+    int walkLevel_ ;
+
     //! do assignment
     void assign (const ThisType & org);
 
