@@ -988,24 +988,31 @@ namespace Dune {
 
   template <class GridImp>
   inline ALU3dGridHierarchicIterator<GridImp> ::
-  ALU3dGridHierarchicIterator(const ALU3dGridHierarchicIterator<GridImp> & org)
+  ALU3dGridHierarchicIterator(const ThisType& org)
     : ALU3dGridEntityPointer<0,GridImp> ( org.grid_, org.maxlevel_ )
-      , elem_ (org.elem_)
-      , maxlevel_(org.maxlevel_)
-  {}
+  {
+    assign( org );
+  }
 
   template <class GridImp>
   inline ALU3dGridHierarchicIterator<GridImp> &
   ALU3dGridHierarchicIterator<GridImp> ::
-  operator = (const ALU3dGridHierarchicIterator<GridImp> & org)
+  operator = (const ThisType& org)
+  {
+    assign( org );
+    return *this;
+  }
+
+  template <class GridImp>
+  inline void
+  ALU3dGridHierarchicIterator<GridImp> ::
+  assign(const ThisType& org)
   {
     elem_     = org.elem_;
     maxlevel_ = org.maxlevel_;
 
     // this method will free entity
-    this->clone(org);
-
-    return *this;
+    ALU3dGridEntityPointer<0,GridImp> :: clone(org);
   }
 
   template <class GridImp>

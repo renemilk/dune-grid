@@ -634,6 +634,9 @@ namespace Dune {
     ThisType & operator = (const ThisType & org);
 
   private:
+    // assign iterator
+    void assign(const ThisType & org);
+
     // go to next valid element
     ALU3DSPACE HElementType * goNextElement (ALU3DSPACE HElementType * oldEl);
 
