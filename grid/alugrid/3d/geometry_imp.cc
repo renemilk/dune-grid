@@ -465,7 +465,18 @@ namespace Dune {
     ss << "} \n";
   }
 
+  template<int mydim, int cdim>
+  inline bool ALU3dGridGeometry<mydim,cdim,const ALU3dGrid<3, 3, tetra> > ::
+  affine() const
+  {
+    return true;
+  }
+
+  /////////////////////////////////////////////////////////////////////////
+  //
   //- Hexahedron specialization
+  //
+  /////////////////////////////////////////////////////////////////////////
   template <int mydim, int cdim>
   inline ALU3dGridGeometry<mydim, cdim, const ALU3dGrid<3, 3, hexa> >::
   ALU3dGridGeometry() :
@@ -651,6 +662,14 @@ namespace Dune {
     return integrationElement(localBaryCenter_);
   }
 
+  template <int mydim, int cdim>
+  inline bool
+  ALU3dGridGeometry<mydim, cdim, const ALU3dGrid<3, 3, hexa> >::
+  affine() const
+  {
+    buildMapping();
+    return triMap_.affine();
+  }
 
   template <>
   inline const FieldMatrix<alu3d_ctype, 3, 3>&
