@@ -173,6 +173,7 @@ namespace Dune {
     //! access to coordinates of corners. Index is the number of the corner
     const FieldVector<ctype, cdim>& operator[] (int i) const
     {
+      assert( i >= 0 && i < (int) coord_.N() );
       FieldVector<ctype, cdim>& c = coord_[i];
       int bit=0;
       for (int k=0; k<cdim; k++)   // run over all directions in world
@@ -315,6 +316,7 @@ namespace Dune {
     //! access to coordinates of corners. Index is the number of the corner
     const FieldVector<ctype, mydim>& operator[] (int i) const
     {
+      assert( i >= 0 && i < (int) coord_.N() );
       FieldVector<ctype, mydim>& c = coord_[i];
       for (int k=0; k<mydim; k++)
         if (i&(1<<k))
