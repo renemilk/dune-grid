@@ -282,7 +282,7 @@ namespace Dune {
 
     // In addition we need memory in order to return references.
     // Possibly we should change this in the interface ...
-    mutable FieldMatrix<ctype,  Power_m_p<2,mydim>::power, cdim> coord_; // a point
+    mutable FieldMatrix<ctype,  Power_m_p<2,mydim>::power, cdim> coord_; // the coordinates
 
     const YaspGeometry<mydim,cdim,GridImp>&
     operator = (const YaspGeometry<mydim,cdim,GridImp>& g);
