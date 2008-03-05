@@ -1,4 +1,5 @@
 Module: dune-grid
 Version: 1.0.1-rk-diss
+Email: robertk@mathematik.uni-freiburg.de
 Depends: dune-common
 Suggests: UG Alberta Alu3d
