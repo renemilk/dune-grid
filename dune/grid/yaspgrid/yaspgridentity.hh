@@ -60,7 +60,7 @@ namespace Dune {
 
     typedef typename MultiYGrid<dim,ctype>::YGridLevelIterator YGLI;
     typedef typename SubYGrid<dim,ctype>::TransformingSubIterator TSI;
-    YaspEntity (const GridImp* yg, const YGLI& g, const TSI& it)
+    YaspEntity (const GridImp* /*yg*/, const YGLI& /*g*/, const TSI& /*it*/)
     {
       DUNE_THROW(GridError, "YaspEntity not implemented");
     }

@@ -1039,7 +1039,7 @@ namespace Dune {
              This template method will vanish due to the inheritance
              rules.
      */
-    bool mark( int refCount, const typename Traits :: template Codim<0>::Entity & e )
+    bool mark( int /*refCount*/, const typename Traits :: template Codim<0>::Entity & /*e*/ )
     {
       return false;
     }
@@ -1051,7 +1051,7 @@ namespace Dune {
 
        \return int adaptation mark, here the default value 0 is returned
      */
-    int getMark ( const typename Traits::template Codim< 0 >::Entity &e ) const
+    int getMark ( const typename Traits::template Codim< 0 >::Entity &/*e*/ ) const
     {
       return 0;
     }
@@ -1072,27 +1072,27 @@ namespace Dune {
     void postAdapt() {}
 
     /** \brief ghostSize is zero by default */
-    int ghostSize (int level, int codim) const { return 0; }
+    int ghostSize (int /*level*/, int /*codim*/) const { return 0; }
 
     /** \brief overlapSize is zero by default */
-    int overlapSize (int level, int codim) const { return 0; }
+    int overlapSize (int /*level*/, int /*codim*/) const { return 0; }
 
     /** \brief ghostSize is zero by default */
-    int ghostSize (int codim) const { return 0; }
+    int ghostSize (int /*codim*/) const { return 0; }
 
     /** \brief overlapSize is zero by default */
-    int overlapSize (int codim) const { return 0; }
+    int overlapSize (int /*codim*/) const { return 0; }
 
     /** dummy communicate, doing nothing  */
     template<class DataHandleImp, class DataTypeImp>
-    void communicate (CommDataHandleIF<DataHandleImp,DataTypeImp> & data,
-                      InterfaceType iftype, CommunicationDirection dir, int level) const
+    void communicate (CommDataHandleIF<DataHandleImp,DataTypeImp> & /*data*/,
+                      InterfaceType /*iftype*/, CommunicationDirection /*dir*/, int /*level*/) const
     {}
 
     /** dummy communicate, doing nothing  */
     template<class DataHandleImp, class DataTypeImp>
-    void communicate (CommDataHandleIF<DataHandleImp,DataTypeImp> & data,
-                      InterfaceType iftype, CommunicationDirection dir) const
+    void communicate (CommDataHandleIF<DataHandleImp,DataTypeImp> & /*data*/,
+                      InterfaceType /*iftype*/, CommunicationDirection /*dir*/) const
     {}
 
     /*! \brief default implementation of load balance does nothing and returns false */
@@ -1103,7 +1103,7 @@ namespace Dune {
 
     /*! \brief default implementation of load balance does nothing and returns false */
     template<class DataHandle>
-    bool loadBalance (DataHandle& data)
+    bool loadBalance (DataHandle& /*data*/)
     {
       return false;
     }

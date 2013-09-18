@@ -1053,7 +1053,7 @@ namespace Dune {
   {
   public:
     typedef FieldVector<int, d>  iTupel;
-    virtual void loadbalance (const iTupel& size, int P, iTupel& dims) const
+    virtual void loadbalance (const iTupel& /*size*/, int P, iTupel& dims) const
     {
       bool found=false;
       for(int i=1; i<P; ++i)

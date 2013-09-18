@@ -44,7 +44,7 @@ namespace Dune
     typedef typename Grid::template Codim< dimension >::Entity Vertex;
 
   public:
-    explicit DGFGridFactory ( std::istream &input,
+    explicit DGFGridFactory ( std::istream &/*input*/,
                               MPICommunicatorType comm = MPIHelper::getCommunicator() ) DUNE_DEPRECATED
       : macroGrid_( comm )
     {
@@ -160,7 +160,7 @@ namespace Dune
 
     template< class GG, class II >
     const typename DGFBoundaryParameter::type &
-    boundaryParameter ( const Intersection< GG, II > & intersection ) const
+    boundaryParameter ( const Intersection< GG, II > & /*intersection*/ ) const
     {
       return DGFBoundaryParameter::defaultValue();
     }

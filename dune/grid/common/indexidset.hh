@@ -286,7 +286,7 @@ namespace Dune
      *  It does only work for cc=0 since the subEntity method is not present otherwise.
      */
     template< int cc >
-    IndexType subIndex ( const typename Traits::template Codim< cc >::Entity &e, int i, unsigned int codim ) const
+    IndexType subIndex ( const typename Traits::template Codim< cc >::Entity &/*e*/, int /*i*/, unsigned int /*codim*/ ) const
     {
       // this does not work, since subEntity is a template method requiring codim to be
       // a template parameter
