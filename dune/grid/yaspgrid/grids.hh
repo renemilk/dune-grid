@@ -906,6 +906,30 @@ namespace Dune {
         return *this;
       }
 
+      //! Increment iterator by distance.
+      TransformingSubIterator& operator+= (int distance)
+      {
+        this->_index += distance;
+        int tmp = this->_index;
+        for (int i=0; i<d; i++)
+        {
+          int c = this->_origin[i] + tmp % this->_size[i];
+          this->_superindex +=
+            (c - this->_coord[i]) * this->_superincrement[i];
+          this->_coord[i] = c;
+          _position[i] = _begin[i] + _h[i] * (tmp % this->_size[i]);
+          tmp /= this->_size[i];
+        }
+        // if we wrapped around, back to to begin(), we must put the iterator to end()
+        if (tmp)
+        {
+          for (int i=0; i<d; i++)
+            this->_superindex += (this->_size[i]-1)*this->_superincrement[i];
+          this->_superindex += this->_superincrement[0];
+        }
+        return *this;
+      }
+
       //! Return position of current cell in direction i.
       ct position (int i) const
       {

@@ -7,6 +7,8 @@
  * \brief The YaspLevelIterator class
  */
 
+#include <iterator>
+
 namespace Dune {
 
 
@@ -26,6 +28,8 @@ namespace Dune {
     typedef typename MultiYGrid<dim,ctype>::YGridLevelIterator YGLI;
     typedef typename SubYGrid<dim,ctype>::TransformingSubIterator TSI;
 
+    typedef std::random_access_iterator_tag iterator_category;
+
     //! constructor
     YaspLevelIterator (const GridImp * yg, const YGLI & g, const TSI & it) :
       YaspEntityPointer<codim,GridImp>(yg,g,it) {}
@@ -38,6 +42,16 @@ namespace Dune {
     void increment()
     {
       ++(this->_it);
+    }
+
+    void increment(int distance)
+    {
+      this->_it += distance;
+    }
+
+    int difference(const YaspLevelIterator &other) const
+    {
+      return this->_it.index() - other._it.index();
     }
   };
 
