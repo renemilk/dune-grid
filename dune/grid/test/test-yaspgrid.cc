@@ -8,12 +8,12 @@
 
 #include <dune/grid/yaspgrid.hh>
 
-#include "gridcheck.cc"
+#include "checkadaptation.cc"
 #include "checkcommunicate.cc"
 #include "checkgeometryinfather.cc"
 #include "checkintersectionit.cc"
-#include "checkadaptation.cc"
 #include "checkpartition.cc"
+#include "gridcheck.cc"
 
 int rank;
 
