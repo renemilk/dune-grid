@@ -14,11 +14,12 @@
 #include "checkintersectionit.cc"
 #include "checkpartition.cc"
 #include "gridcheck.cc"
+#include "checkrandomaccessiterators.hh"
 
 int rank;
 
 template <int dim>
-void check_yasp(bool p0=false) {
+bool check_yasp(bool p0=false) {
   typedef Dune::FieldVector<double,dim> fTupel;
 
   std::cout << std::endl << "YaspGrid<" << dim << ">";
@@ -59,9 +60,13 @@ void check_yasp(bool p0=false) {
   // check grid adaptation interface
   checkAdaptRefinement(grid);
   checkPartitionType( grid.leafView() );
+  // check random access iterators
+  return checkRandomAccessIterators( grid.leafView() );
 }
 
 int main (int argc , char **argv) {
+  int result = 0;
+
   try {
 #if HAVE_MPI
     // initialize MPI
@@ -71,13 +76,13 @@ int main (int argc , char **argv) {
     MPI_Comm_rank(MPI_COMM_WORLD,&rank);
 #endif
 
-    check_yasp<1>();
-    //check_yasp<1>(true);
-    check_yasp<2>();
-    //check_yasp<2>(true);
-    check_yasp<3>();
-    //check_yasp<3>(true);
-    //check_yasp<4>();
+    check_yasp<1>() || (result = 1);
+    //check_yasp<1>(true) || (result = 1);
+    check_yasp<2>() || (result = 1);
+    //check_yasp<2>(true) || (result = 1);
+    check_yasp<3>() || (result = 1);
+    //check_yasp<3>(true) || (result = 1);
+    //check_yasp<4>() || (result = 1);
 
   } catch (Dune::Exception &e) {
     std::cerr << e << std::endl;
@@ -92,5 +97,5 @@ int main (int argc , char **argv) {
   MPI_Finalize();
 #endif
 
-  return 0;
+  return result;
 }
