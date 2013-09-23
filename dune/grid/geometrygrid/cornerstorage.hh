@@ -153,7 +153,7 @@ namespace Dune
       }
 
       template< unsigned int numCorners >
-      void calculate ( Coordinate (&corners)[ numCorners ] ) const
+      void calculate ( Coordinate (&/*corners*/)[ numCorners ] ) const
       {
         assert( numCorners == hostLocalGeometry_.corners() );
       }

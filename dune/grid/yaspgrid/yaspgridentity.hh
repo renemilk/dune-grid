@@ -339,7 +339,7 @@ namespace Dune {
     }
 
     //! Returns iterator to one past the last son
-    HierarchicIterator hend (int maxlevel) const
+    HierarchicIterator hend (int /*maxlevel*/) const
     {
       return YaspHierarchicIterator<GridImp>(_yg,_g,_it,_g.level());
     }

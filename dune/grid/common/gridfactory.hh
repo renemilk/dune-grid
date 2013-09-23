@@ -119,9 +119,9 @@ namespace Dune
         Make sure the inserted element is not inverted (this holds even
         for simplices).  There are grids that can't handle inverted elements.
      */
-    virtual void insertElement(const GeometryType& type,
-                               const std::vector<unsigned int>& vertices,
-                               const shared_ptr<VirtualFunction<FieldVector<ctype,dimension>,FieldVector<ctype,dimworld> > >& elementParametrization)
+    virtual void insertElement(const GeometryType& /*type*/,
+                               const std::vector<unsigned int>& /*vertices*/,
+                               const shared_ptr<VirtualFunction<FieldVector<ctype,dimension>,FieldVector<ctype,dimworld> > >& /*elementParametrization*/)
     {
       DUNE_THROW(GridError, "This grid does not support parametrized elements!");
     }
@@ -148,8 +148,8 @@ namespace Dune
      *  \param[in]  vertices         the indices of the vertices of the segment
      *  \param[in]  boundarySegment  user defined implementation of the boundary segment's geometry
      */
-    virtual void insertBoundarySegment(const std::vector<unsigned int>& vertices,
-                                       const shared_ptr<BoundarySegment<dimension,dimworld> >& boundarySegment)
+    virtual void insertBoundarySegment(const std::vector<unsigned int>& /*vertices*/,
+                                       const shared_ptr<BoundarySegment<dimension,dimworld> >& /*boundarySegment*/)
     {
       DUNE_THROW(GridError, "This grid does not support parametrized boundary segments!");
     }
@@ -176,7 +176,7 @@ namespace Dune
      *  \returns insertion index of the entity
      */
     virtual unsigned int
-    insertionIndex ( const typename Codim< 0 >::Entity &entity ) const
+    insertionIndex ( const typename Codim< 0 >::Entity &/*entity*/ ) const
     {
       DUNE_THROW( NotImplemented, "insertion indices have not yet been implemented." );
     }
@@ -197,7 +197,7 @@ namespace Dune
      *  \returns insertion index of the entity
      */
     virtual unsigned int
-    insertionIndex ( const typename Codim< dimension >::Entity &entity ) const
+    insertionIndex ( const typename Codim< dimension >::Entity &/*entity*/ ) const
     {
       DUNE_THROW( NotImplemented, "insertion indices have not yet been implemented." );
     }
@@ -222,7 +222,7 @@ namespace Dune
      *        (see also wasInserted).
      */
     virtual unsigned int
-    insertionIndex ( const typename GridType::LeafIntersection &intersection ) const
+    insertionIndex ( const typename GridType::LeafIntersection &/*intersection*/ ) const
     {
       DUNE_THROW( NotImplemented, "insertion indices have not yet been implemented." );
     }
@@ -242,7 +242,7 @@ namespace Dune
      *  \returns \b true, if the intersection was inserted
      */
     virtual bool
-    wasInserted ( const typename GridType::LeafIntersection &intersection ) const
+    wasInserted ( const typename GridType::LeafIntersection &/*intersection*/ ) const
     {
       DUNE_THROW( NotImplemented, "insertion indices have not yet been implemented." );
     }
@@ -276,7 +276,7 @@ namespace Dune
     }
 
     /** \brief Insert a vertex into the coarse grid */
-    virtual void insertVertex(const FieldVector<ctype,dimworld>& pos) {
+    virtual void insertVertex(const FieldVector<ctype,dimworld>& /*pos*/) {
       DUNE_THROW(GridError, "There is no grid factory for this grid type!");
     }
 
@@ -287,8 +287,8 @@ namespace Dune
         Make sure the inserted element is not inverted (this holds even
         for simplices).  There are grids that can't handle inverted tets.
      */
-    virtual void insertElement(const GeometryType& type,
-                               const std::vector<unsigned int>& vertices) {
+    virtual void insertElement(const GeometryType& /*type*/,
+                               const std::vector<unsigned int>& /*vertices*/) {
       DUNE_THROW(GridError, "There is no grid factory for this grid type!");
     }
 
@@ -305,7 +305,7 @@ namespace Dune
      *
      *  \param[in]  vertices  the indices of the vertices of the segment
      */
-    virtual void insertBoundarySegment(const std::vector<unsigned int>& vertices) {
+    virtual void insertBoundarySegment(const std::vector<unsigned int>& /*vertices*/) {
       DUNE_THROW(GridError, "There is no grid factory for this grid type!");
     }
 

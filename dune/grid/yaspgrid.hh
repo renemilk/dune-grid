@@ -563,27 +563,27 @@ namespace Dune {
     }
 
     //! return size (= distance in graph) of overlap region
-    int overlapSize (int level, int codim) const
+    int overlapSize (int level, int /*codim*/) const
     {
       YGLI g = MultiYGrid<dim,ctype>::begin(level);
       return g.overlap();
     }
 
     //! return size (= distance in graph) of overlap region
-    int overlapSize (int codim) const
+    int overlapSize (int /*codim*/) const
     {
       YGLI g = MultiYGrid<dim,ctype>::begin(maxLevel());
       return g.overlap();
     }
 
     //! return size (= distance in graph) of ghost region
-    int ghostSize (int level, int codim) const
+    int ghostSize (int /*level*/, int /*codim*/) const
     {
       return 0;
     }
 
     //! return size (= distance in graph) of ghost region
-    int ghostSize (int codim) const
+    int ghostSize (int /*codim*/) const
     {
       return 0;
     }

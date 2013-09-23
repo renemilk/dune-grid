@@ -190,13 +190,13 @@ namespace Dune {
     }
 
     //! return unit outer normal, this should be dependent on local coordinates for higher order boundary
-    FieldVector<ctype, dimworld> outerNormal (const FieldVector<ctype, dim-1>& local) const
+    FieldVector<ctype, dimworld> outerNormal (const FieldVector<ctype, dim-1>& /*local*/) const
     {
       return _faceInfo[_count].normal;
     }
 
     //! return unit outer normal, this should be dependent on local coordinates for higher order boundary
-    FieldVector<ctype, dimworld> unitOuterNormal (const FieldVector<ctype, dim-1>& local) const
+    FieldVector<ctype, dimworld> unitOuterNormal (const FieldVector<ctype, dim-1>& /*local*/) const
     {
       return _faceInfo[_count].normal;
     }
@@ -210,7 +210,7 @@ namespace Dune {
     //! return unit outer normal, this should be dependent on
     //! local coordinates for higher order boundary
     //! the normal is scaled with the integration element of the intersection.
-    FieldVector<ctype, dimworld> integrationOuterNormal (const FieldVector<ctype, dim-1>& local) const
+    FieldVector<ctype, dimworld> integrationOuterNormal (const FieldVector<ctype, dim-1>& /*local*/) const
     {
       FieldVector<ctype, dimworld> n = _faceInfo[_count].normal;
       n *= geometry().volume();

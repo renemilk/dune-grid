@@ -264,14 +264,14 @@ namespace Dune {
     }
 
     //! subentity compressed index (not available here)
-    int subCompressedIndex (int cd, int i) const
+    int subCompressedIndex (int /*cd*/, int /*i*/) const
     {
       DUNE_THROW(NotImplemented,"subIndex for entities with codimension > 0 is not implemented");
       return -1;
     }
 
     //! subentity compressed leaf index (not available here)
-    int subCompressedLeafIndex (int cd, int i) const
+    int subCompressedLeafIndex (int /*cd*/, int /*i*/) const
     {
       DUNE_THROW(NotImplemented,"subIndex for entities with codimension > 0 is not implemented");
       return -1;
@@ -830,7 +830,7 @@ namespace Dune {
     }
 
     /*! @brief Return an outer normal (length not necessarily 1) */
-    GlobalCoordinate outerNormal (const LocalCoordinate& local) const
+    GlobalCoordinate outerNormal (const LocalCoordinate& /*local*/) const
     {
       return centerUnitOuterNormal();
     }
@@ -844,7 +844,7 @@ namespace Dune {
     }
 
     /*! @brief Return unit outer normal (length == 1)  */
-    GlobalCoordinate unitOuterNormal (const LocalCoordinate& local) const
+    GlobalCoordinate unitOuterNormal (const LocalCoordinate& /*local*/) const
     {
       return centerUnitOuterNormal();
     }
@@ -1381,7 +1381,7 @@ namespace Dune {
        the protocol. Therefore P is called the "protocol class".
      */
     template<class T, template<class> class P, int codim>
-    void communicate (T& t, InterfaceType iftype, CommunicationDirection dir, int level)
+    void communicate (T& /*t*/, InterfaceType /*iftype*/, CommunicationDirection /*dir*/, int /*level*/)
     {
       // SGrid is sequential and has no periodic boundaries, so do nothing ...
       return;
@@ -1418,13 +1418,13 @@ namespace Dune {
     int global_size (int codim) const;
 
     //! return size (= distance in graph) of overlap region
-    int overlapSize (int level, int codim)
+    int overlapSize (int /*level*/, int /*codim*/)
     {
       return 0;
     }
 
     //! return size (= distance in graph) of ghost region
-    int ghostSize (int level, int codim)
+    int ghostSize (int /*level*/, int /*codim*/)
     {
       return 0;
     }
@@ -1483,11 +1483,11 @@ namespace Dune {
        @{
      */
     template<class DataHandle>
-    void communicate (DataHandle& data, InterfaceType iftype, CommunicationDirection dir, int level) const
+    void communicate (DataHandle& /*data*/, InterfaceType /*iftype*/, CommunicationDirection /*dir*/, int /*level*/) const
     {}
 
     template<class DataHandle>
-    void communicate (DataHandle& data, InterfaceType iftype, CommunicationDirection dir) const
+    void communicate (DataHandle& /*data*/, InterfaceType /*iftype*/, CommunicationDirection /*dir*/) const
     {}
 
     const CollectiveCommunication<SGrid>& comm () const
@@ -1496,25 +1496,25 @@ namespace Dune {
     }
 
     //! return size (= distance in graph) of overlap region
-    int overlapSize (int level, int codim) const
+    int overlapSize (int /*level*/, int /*codim*/) const
     {
       return 0;
     }
 
     //! return size (= distance in graph) of overlap region
-    int overlapSize (int codim) const
+    int overlapSize (int /*codim*/) const
     {
       return 0;
     }
 
     //! return size (= distance in graph) of ghost region
-    int ghostSize (int level, int codim) const
+    int ghostSize (int /*level*/, int /*codim*/) const
     {
       return 0;
     }
 
     //! return size (= distance in graph) of ghost region
-    int ghostSize (int codim) const
+    int ghostSize (int /*codim*/) const
     {
       return 0;
     }
