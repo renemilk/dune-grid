@@ -972,6 +972,12 @@ namespace Dune {
       static const bool v = false;
     };
 
+  template< int dim >
+  struct hasSingleGeometryType< UGGrid< dim > >
+  {
+    static const bool v = true;
+    static const unsigned int topologyId =  GenericGeometry :: CubeTopology< dim > :: type :: id ;
+  };
   }
 
 } // namespace Dune
